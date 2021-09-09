@@ -15,6 +15,9 @@ const Messages = () => {
     const [userName, setUserName] = useState('');
     const [input, setInput] = useState('');
     const scroll = useRef(null);
+    useEffect(() => {
+        setUserName(prompt('please enter your name'));
+    },[])
 
     useEffect(() => {
         // get messages from firebase & set it to the state
@@ -29,23 +32,17 @@ const Messages = () => {
             });
         })
         .catch(err=>console.log(err));    
-    },[db])
-
-    useEffect(() => {
-        setUserName(prompt('please enter your name'));
-    },[])
-// Add a new document with a generated id.
-
-
-const sendMessages = (e) => {
-    e.preventDefault();
-    addDoc(collection(db, "messages"), {
-        message: input,
-        userName: userName,
-        timeStamp: serverTimestamp()
     })
-    setInput('');
-}
+
+    const sendMessages = (e) => {
+        e.preventDefault();
+        addDoc(collection(db, "messages"), {
+            message: input,
+            userName: userName,
+            timeStamp: serverTimestamp()
+        })
+        setInput('');
+    }
 
     return <div className='messages' ref={scroll}> 
 
