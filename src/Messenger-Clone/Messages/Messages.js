@@ -16,7 +16,6 @@ const Messages = () => {
     const [input, setInput] = useState('');
 
     // to update when message sent
-    const [sent, setSent] = useState(true);
     const scroll = useRef(null)
 
 
@@ -45,7 +44,6 @@ const Messages = () => {
 
 const sendMessages = (e) => {
     e.preventDefault();
-    setSent(!sent);
     addDoc(collection(db, "messages"), {
         message: input,
         userName: userName,
