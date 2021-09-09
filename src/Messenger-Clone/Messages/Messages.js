@@ -33,7 +33,7 @@ const Messages = () => {
             });
         })
         .catch(err=>console.log(err));    
-    },[])
+    },[db])
 
     const sendMessages = (e) => {
         e.preventDefault();
