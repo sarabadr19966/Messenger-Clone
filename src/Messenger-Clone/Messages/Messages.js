@@ -34,8 +34,8 @@ const Messages = () => {
             });
         })
         .catch(err=>console.log(err));
-       
-    },[sent])
+        
+    },[messages])
 
     useEffect(() => {
         setUserName(prompt('please enter your name'));
