@@ -18,6 +18,10 @@ const Messages = () => {
     
     useEffect(() => {
         setUserName(prompt('please enter your name'));
+        scroll.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+        });
     },[])
 
     useEffect(() => {
@@ -27,13 +31,10 @@ const Messages = () => {
         getDocs(q)
         .then(documents=>{
             setMessages(documents.docs.map(doc =>({id: doc.id,message: doc.data()})));
-            scroll.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'end',
-            });
+
         })
         .catch(err=>console.log(err));    
-    },[db])
+    },[messages])
 
     const sendMessages = (e) => {
         e.preventDefault();
@@ -43,6 +44,10 @@ const Messages = () => {
             timeStamp: serverTimestamp()
         })
         setInput('');
+        scroll.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+        });
     }
 
     return <div className='messages' ref={scroll}> 
