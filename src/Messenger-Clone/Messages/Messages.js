@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Message from './Message/Message';
-import { collection, getDocs,orderBy, query, addDoc, serverTimestamp } from 'firebase/firestore/lite';
+import { collection, getDocs,orderBy, query, addDoc, serverTimestamp,  } from 'firebase/firestore/lite';
 import db from '../Apis/firebase';
 import FlipMove from 'react-flip-move';
 import './Messages.css';
@@ -14,7 +14,9 @@ const Messages = () => {
     const [messages ,setMessages] = useState([]);
     const [userName, setUserName] = useState('');
     const [input, setInput] = useState('');
+    const [docss, setDocss] = useState([]);
     const scroll = useRef(null);
+
     useEffect(() => {
         setUserName(prompt('please enter your name'));
     },[])
@@ -25,6 +27,7 @@ const Messages = () => {
         const q = query(messagesCol, orderBy("timeStamp", "asec"));
         getDocs(q)
         .then(documents=>{
+            setDocss(document)
             setMessages(documents.docs.map(doc =>({id: doc.id,message: doc.data()})));
             scroll.current.scrollIntoView({
                 behavior: 'smooth',
@@ -32,7 +35,7 @@ const Messages = () => {
             });
         })
         .catch(err=>console.log(err));    
-    })
+    },[docss])
 
     const sendMessages = (e) => {
         e.preventDefault();
