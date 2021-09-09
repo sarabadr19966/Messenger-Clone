@@ -18,10 +18,7 @@ const Messages = () => {
     // to update when message sent
     const scroll = useRef(null)
 
-
-
-    useEffect(() => {
-        // get messages from firebase & set it to the state
+    const getMessages= (db) => {
         const messagesCol = collection(db, 'messages');
         const q = query(messagesCol, orderBy("timeStamp", "asec"));
         getDocs(q)
@@ -33,8 +30,12 @@ const Messages = () => {
             });
         })
         .catch(err=>console.log(err));
-        
-    },[messages])
+    }
+
+    useEffect(() => {
+        // get messages from firebase & set it to the state
+        getMessages(db);
+    },[])
 
     useEffect(() => {
         setUserName(prompt('please enter your name'));
@@ -50,6 +51,7 @@ const sendMessages = (e) => {
         timeStamp: serverTimestamp()
     }); 
     setInput('');
+    getMessages(db);
 }
 
     return <div className='messages' ref={scroll}> 
