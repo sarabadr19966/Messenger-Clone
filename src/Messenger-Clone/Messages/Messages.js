@@ -5,10 +5,8 @@ import db from '../Apis/firebase';
 import FlipMove from 'react-flip-move';
 import './Messages.css';
 
-const Messages = ({userName}) => {
+const Messages = ({userName, scroll}) => {
     const [messages ,setMessages] = useState([]);
-    
-
     useEffect(() => {
         // get messages from firebase & set it to the state
         const messagesCol = collection(db, 'messages');
@@ -19,7 +17,7 @@ const Messages = ({userName}) => {
 
         })
         .catch(err=>console.log(err));    
-    },[messages.length])
+    },[messages])
 
     return <div className='messages'> 
         <FlipMove>

@@ -11,13 +11,15 @@ const Messenger = () => {
     const [userName, setUserName] = useState('');
     const [input, setInput] = useState('');
     const scroll = useRef(null);   
+    const inputRef = useRef(null);
 
     useEffect(() => {
         setUserName(prompt('please enter your name'));
-        scroll.current.scrollIntoView({
+      scroll.current.scrollIntoView({
             behavior: 'smooth',
             block: 'end',
-        });
+        });  
+        inputRef.current.focus();
     },[])
 
     const sendMessages = (e) => {
@@ -27,19 +29,21 @@ const Messenger = () => {
             userName: userName,
             timeStamp: serverTimestamp()
         })
-        
         setInput('');
+        setTimeout(() => {
         scroll.current.scrollIntoView({
             behavior: 'smooth',
             block: 'end',
         });
+     }, 400);
+
     }
 
     return <div className='messenger' ref={scroll}>
         <img src={logo} alt='messenger' style={{width: '100px', height: '100px'}}/>
         <form className='messenger__form'>
             <FormControl className='messenger__formControl'>
-                <input className='messenger__input' value={input} onChange={e => setInput(e.target.value)} placeholder='Enter Message'/>
+                <input ref={inputRef} className='messenger__input' value={input} onChange={e => setInput(e.target.value)} placeholder='Enter Message'/>
                 <IconButton  className='messenger__send' type='submit' variant='contained' color='primary' disabled={!input} onClick={sendMessages}>
                     <SendIcon/>
                 </IconButton>
