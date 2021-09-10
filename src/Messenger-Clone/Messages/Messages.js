@@ -7,6 +7,7 @@ import './Messages.css';
 
 const Messages = ({userName}) => {
     const [messages ,setMessages] = useState([]);
+    
 
     useEffect(() => {
         // get messages from firebase & set it to the state
@@ -18,7 +19,7 @@ const Messages = ({userName}) => {
 
         })
         .catch(err=>console.log(err));    
-    },[messages])
+    },[messages.length])
 
     return <div className='messages'> 
         <FlipMove>
