@@ -1,28 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect,} from 'react';
 import Message from './Message/Message';
-import { collection, getDocs,orderBy, query, addDoc, serverTimestamp,  } from 'firebase/firestore/lite';
+import { collection, getDocs,orderBy, query, } from 'firebase/firestore/lite';
 import db from '../Apis/firebase';
 import FlipMove from 'react-flip-move';
 import './Messages.css';
-import { FormControl } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
 
-
-
-const Messages = () => {
+const Messages = ({userName}) => {
     const [messages ,setMessages] = useState([]);
-    const [userName, setUserName] = useState('');
-    const [input, setInput] = useState('');
-    const scroll = useRef(null);
-    
-    useEffect(() => {
-        setUserName(prompt('please enter your name'));
-        scroll.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-        });
-    },[])
 
     useEffect(() => {
         // get messages from firebase & set it to the state
@@ -36,39 +20,13 @@ const Messages = () => {
         .catch(err=>console.log(err));    
     },[messages])
 
-    const sendMessages = (e) => {
-        e.preventDefault();
-        addDoc(collection(db, "messages"), {
-            message: input,
-            userName: userName,
-            timeStamp: serverTimestamp()
-        })
-        setInput('');
-        scroll.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-        });
-    }
-
-    return <div className='messages' ref={scroll}> 
-
-
-    <form className='messages__form'>
-    <FormControl className='messages__formControl'>
-        <input className='messages__input' value={input} onChange={e => setInput(e.target.value)} placeholder='Enter Message'/>
-        <IconButton  className='messages__send' type='submit' variant='contained' color='primary' disabled={!input} onClick={sendMessages}>
-            <SendIcon/>
-        </IconButton>
-
-    </FormControl>
-    </form>
+    return <div className='messages'> 
         <FlipMove>
             {messages.map(data => {
             return <Message key={data.id} message={data.message} userName={userName}/>
             })}
         </FlipMove>
-      
     </div>
-}
+};
 
 export default Messages;
