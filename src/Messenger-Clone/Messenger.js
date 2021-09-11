@@ -1,12 +1,13 @@
-import React, {useState , useRef, useEffect} from 'react';
-import Messages from './Messages/Messages';
-import logo from '../images/messenger-logo.png';
-import { collection, addDoc, serverTimestamp,  } from 'firebase/firestore/lite';
-import db from './Apis/firebase';
-import './Messenger.css';
+import React, { useState , useRef, useEffect } from 'react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite';
 import { FormControl } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
+import logo from '../images/messenger-logo.png';
+import db from './Apis/firebase';
+import Messages from './Messages/Messages';
+import './Messenger.css';
+
 const Messenger = () => {
     const [userName, setUserName] = useState('');
     const [input, setInput] = useState('');
@@ -15,7 +16,7 @@ const Messenger = () => {
 
     useEffect(() => {
         setUserName(prompt('please enter your name'));
-      scroll.current.scrollIntoView({
+        scroll.current.scrollIntoView({
             behavior: 'smooth',
             block: 'end',
         });  
@@ -28,19 +29,19 @@ const Messenger = () => {
             message: input,
             userName: userName,
             timeStamp: serverTimestamp()
-        })
+        });
         setInput('');
         setTimeout(() => {
-        scroll.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-        });
-     }, 400);
+            scroll.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'end',
+            });
+        }, 400);
 
-    }
+    };
 
     return <div className='messenger' ref={scroll}>
-        <img src={logo} alt='messenger' style={{width: '100px', height: '100px'}}/>
+        <img src={logo} alt='messenger' className='messenger__logo'/>
         <form className='messenger__form'>
             <FormControl className='messenger__formControl'>
                 <input ref={inputRef} className='messenger__input' value={input} onChange={e => setInput(e.target.value)} placeholder='Enter Message'/>
