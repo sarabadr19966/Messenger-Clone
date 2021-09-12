@@ -16,10 +16,6 @@ const Messenger = () => {
 
     useEffect(() => {
         setUserName(prompt('please enter your name'));
-        scroll.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-        });  
         inputRef.current.focus();
     },[])
 
