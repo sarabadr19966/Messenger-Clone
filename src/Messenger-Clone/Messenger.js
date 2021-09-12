@@ -11,7 +11,6 @@ import './Messenger.css';
 const Messenger = () => {
     const [userName, setUserName] = useState('');
     const [input, setInput] = useState('');
-    const scroll = useRef(null);   
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -20,10 +19,7 @@ const Messenger = () => {
     },[])
 
     useEffect(() => {
-        scroll.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-        });
+        window.scrollTo(0,document.body.scrollHeight);
     })
 
     const sendMessages = (e) => {
@@ -46,7 +42,7 @@ const Messenger = () => {
                 </IconButton>
             </FormControl>
         </form>
-        <Messages userName={userName} ref={scroll}/>
+        <Messages userName={userName}/>
     </div>
 };
 
