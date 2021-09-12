@@ -23,6 +23,13 @@ const Messenger = () => {
         inputRef.current.focus();
     },[])
 
+    useEffect(() => {
+        scroll.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+        });
+    })
+
     const sendMessages = (e) => {
         e.preventDefault();
         addDoc(collection(db, "messages"), {
@@ -31,13 +38,6 @@ const Messenger = () => {
             timeStamp: serverTimestamp()
         });
         setInput('');
-        setTimeout(() => {
-            scroll.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'end',
-            });
-        }, 400);
-
     };
 
     return <div className='messenger' ref={scroll}>
