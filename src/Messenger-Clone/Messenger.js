@@ -40,7 +40,7 @@ const Messenger = () => {
         setInput('');
     };
 
-    return <div className='messenger' ref={scroll}>
+    return <div className='messenger' >
         <img src={logo} alt='messenger' className='messenger__logo'/>
         <form className='messenger__form'>
             <FormControl className='messenger__formControl'>
@@ -50,7 +50,7 @@ const Messenger = () => {
                 </IconButton>
             </FormControl>
         </form>
-        <Messages userName={userName}/>
+        <Messages userName={userName} ref={scroll}/>
     </div>
 };
 
