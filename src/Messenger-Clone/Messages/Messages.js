@@ -20,10 +20,8 @@ const Messages = ({ userName }) => {
             setMessages(documents.docs.map(doc =>({id: doc.id,message: doc.data()})));
             // scroll when new messages added
             if(messages.length !== length){
-                scroll.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'end',
-                });
+               
+                window.scrollTo(0, document.body.scrollHeight);
                 setLength(messages.length)
             }
         })
