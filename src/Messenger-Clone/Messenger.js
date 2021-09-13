@@ -14,13 +14,11 @@ const Messenger = () => {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        setUserName(prompt('please enter your name'));
+        setUserName(prompt('please enter your name'));  
         inputRef.current.focus();
     },[])
 
-    useEffect(() => {
-        window.scrollTo(0,document.body.scrollHeight);
-    })
+
 
     const sendMessages = (e) => {
         e.preventDefault();
