@@ -31,9 +31,7 @@ const Messenger = () => {
     };
 
     return <div className='messenger' >
-        <div className='messenger__logo'>
-            <img src={logo} alt='messenger' className='logo'/>
-        </div>
+        <img src={logo} alt='messenger' className='messenger__logo'/>
         <form className='messenger__form'>
             <FormControl className='messenger__formControl'>
                 <input ref={inputRef} className='messenger__input' value={input} onChange={e => setInput(e.target.value)} placeholder='Enter Message'/>

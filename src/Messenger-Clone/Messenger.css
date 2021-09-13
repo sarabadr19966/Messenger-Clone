@@ -1,19 +1,10 @@
 .messenger {
     min-height: 100vh;
-    overflow-x: hidden;
+    text-align: center;
 }
 
 .messenger__logo {
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    right: 40px; 
-}
-
-.logo {
-    z-index: 5;
-    position: fixed;
-    top: 40px;
+    margin-top: 40px;
     width: 80px;
     height: 80px;
 }
