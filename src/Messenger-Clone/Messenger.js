@@ -9,6 +9,7 @@ import Messages from './Messages/Messages';
 import './Messenger.css';
 
 const Messenger = () => {
+
     const [userName, setUserName] = useState('');
     const [input, setInput] = useState('');
     const inputRef = useRef(null);
@@ -18,8 +19,7 @@ const Messenger = () => {
         inputRef.current.focus();
     },[])
 
-
-
+    //send messages and save it in firebase firestore
     const sendMessages = (e) => {
         e.preventDefault();
         addDoc(collection(db, "messages"), {
@@ -31,7 +31,9 @@ const Messenger = () => {
     };
 
     return <div className='messenger' >
-        <img src={logo} alt='messenger' className='messenger__logo'/>
+        <div className='messenger__logo'>
+            <img src={logo} alt='messenger' className='logo'/>
+        </div>
         <form className='messenger__form'>
             <FormControl className='messenger__formControl'>
                 <input ref={inputRef} className='messenger__input' value={input} onChange={e => setInput(e.target.value)} placeholder='Enter Message'/>

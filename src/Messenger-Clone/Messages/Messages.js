@@ -5,8 +5,8 @@ import FlipMove from 'react-flip-move';
 import Message from './Message/Message';
 
 const Messages = ({ userName }) => {
-    const scroll = useRef(null);   
 
+    const scroll = useRef(null);   
     const [messages, setMessages] = useState([]);
     const [length, setLength] = useState(messages.length);
 
@@ -15,10 +15,10 @@ const Messages = ({ userName }) => {
 
         const messagesCol = collection(db, 'messages');
         const q = query(messagesCol, orderBy("timeStamp", "asec"));
-        
         getDocs(q)
         .then(documents=>{
             setMessages(documents.docs.map(doc =>({id: doc.id,message: doc.data()})));
+            // scroll when new messages added
             if(messages.length !== length){
                 scroll.current.scrollIntoView({
                     behavior: 'smooth',
@@ -26,7 +26,6 @@ const Messages = ({ userName }) => {
                 });
                 setLength(messages.length)
             }
-            
         })
         .catch(err=>console.log(err));    
         
